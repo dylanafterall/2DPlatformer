@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build godot cpp",
+            "type": "shell",
+            "command": "scons",
+            "args": [
+                // target platform and architecture (not host)
+                "platform=macos",
+                "arch=arm64",
+                // -j specifies number of threads "-j", "7". by default, will use all threads but one
+                // TARGET OPTIONS:
+                // editor: Build with editor, optimized, with debugging code (defines: TOOLS_ENABLED, DEBUG_ENABLED, -O2//O2)
+                //      disabling tools produces a binary that can run projects but with no editor or project manager)
+                // template_debug: Build with C++ debugging symbols (defines: DEBUG_ENABLED, -O2//O2)
+                // template_release: Build without symbols (defines: -O3//O2)
+                "target=editor",
+                "vulkan_sdk_path=~/Applications/VulkanSDK"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/gdextension/godot-cpp"
+            },
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
